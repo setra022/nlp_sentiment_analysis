@@ -16,6 +16,7 @@ def process(text):
     text = text.translate(table)
     for _ in range(3):
         text = re.sub(stop_words_exp, ' ', f' {text} ')
+    text = text = re.sub(r'\d+', ' ', text)
     text = text = re.sub(r' +', ' ', text)
     text = text.strip()
     return text

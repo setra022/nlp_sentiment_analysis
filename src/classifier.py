@@ -30,7 +30,7 @@ class Classifier:
         self.total_words = 0
         for _, row in train_df.iterrows():
             i, j = map(int, re.match('(\d+):(\d+)', row.character_offsets).groups())
-            prefix, suffix = row.sentence[:i], row.sentence[j:]
+            prefix, suffix = row.sentence[:i].split('.')[-1], row.sentence[j:].split('.')[0]
             neighbors = utils.process(prefix).split()[-self.nb_neighbors:] + utils.process(suffix).split()[:self.nb_neighbors]
             self.data_dict[row.polarity] += Counter(neighbors)
             self.words_count[row.polarity] += len(neighbors)
